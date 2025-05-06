@@ -1649,10 +1649,11 @@ body.mobile-nav-active #mobile-nav-toggle {
   #subscribe button {
     margin-top: 10px;
   }
+  #sub { width: "300px"}
 }
 
 #countdown {
   color: #fffcff;
-  font-size: 35px;
+  font-size: 30px;
   font-weight: 700;
 }
