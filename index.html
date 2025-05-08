@@ -51,7 +51,7 @@
       <div class="modal fade" id="formModal" tabindex="-1" aria-labelledby="formModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
-            <form id="googleForm" action="YOUR_SCRIPT_URL_HERE" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+            <form id="googleForm" action="https://script.google.com/macros/s/AKfycbyYnQDXWMh3SaOui3q_ttdPRhKTDUoPx7irFITvHG9XWeERt0rHCm7UZhXWPuKBzAU4/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;">
               <div class="modal-header">
                 <h5 class="modal-title" id="formModalLabel"><b>Submit Your Info</b></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -259,6 +259,35 @@
 
     const interval = setInterval(updateCountdown, 1000);
     updateCountdown(); // Initial call to display immediately
+  </script>
+
+    <script>
+    const form = document.getElementById('googleForm');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(form);
+      const data = {
+        name: formData.get('name'),
+        email: formData.get('email'),
+        phone: formData.get('phone')
+      };
+
+      try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbyYnQDXWMh3SaOui3q_ttdPRhKTDUoPx7irFITvHG9XWeERt0rHCm7UZhXWPuKBzAU4/exec', {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: { 'Content-Type': 'application/json' }
+        });
+
+        const result = await response.json();
+        alert(result.message);
+        form.reset();
+      } catch (error) {
+        alert('Error: ' + error);
+      }
+    });
   </script>
 
   <!-- Contact Form JavaScript File -->
